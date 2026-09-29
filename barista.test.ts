@@ -67,6 +67,7 @@ describe("Ingredient", () => {
     expect(success).toBe(true);
     expect(ingredient.quantity).toBe(0);
   });
+
 });
 
 describe("Barista", () => {
