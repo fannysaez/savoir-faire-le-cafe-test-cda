@@ -2,6 +2,8 @@
 
 Projet TDD (Test-Driven Development) : classes `Coffee`, `Ingredient` et `Barista` en TypeScript, testées avec Vitest.
 
+---
+
 ## Installation (dans l'ordre)
 
 ### 1. Initialiser le projet
@@ -73,6 +75,8 @@ savoir-faire-le-cafe/
 └── barista.test.ts
 ```
 
+---
+
 ## Lancer les tests
 
 ```bash
@@ -80,3 +84,18 @@ npm test
 ```
 
 `npm test` lance Vitest en mode watch (les tests se relancent à chaque modification).
+
+---
+
+## Coverage (optionnel)
+ 
+Le coverage mesure le pourcentage du code source réellement exécuté par les tests (lignes, branches, fonctions). Non installé par défaut dans ce projet.
+ 
+Pour l'activer :
+ 
+```bash
+npm install -D @vitest/coverage-v8
+npx vitest run --coverage
+```
+ 
+Un rapport est généré, dont une version HTML consultable dans le navigateur, listant les lignes non couvertes par les tests.
