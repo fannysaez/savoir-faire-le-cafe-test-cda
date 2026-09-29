@@ -19,6 +19,13 @@ describe("Coffee", () => {
 
     expect(coffee.ingredients).toEqual([{ name: "lait", quantity: 2 }]);
   });
+
+  // Vérifie que le prix d'un café est toujours un nombre strictement positif
+  it("le prix d'un café est un nombre positif", () => {
+    const coffee = new Coffee("Cappuccino", 4);
+
+    expect(coffee.price).toBeGreaterThan(0);
+  });
 });
 
 describe("Ingredient", () => {
@@ -76,11 +83,11 @@ describe("Barista", () => {
 
   //Vérifie qu'un tableau contient un objet avec la même structrure
   it("le stock contient un ingrédient avec la bonne quantité après ajout", () => {
-  const barista = new Barista("Fanny");
-  barista.addIngredient("café", 5);
+    const barista = new Barista("Fanny");
+    barista.addIngredient("café", 5);
 
-  expect(barista.ingredients).toContainEqual(new Ingredient("café", 5));
-});
+    expect(barista.ingredients).toContainEqual(new Ingredient("café", 5));
+  });
 
   it("retrouve un café existant par son nom", () => {
     const barista = new Barista("Fanny");
@@ -98,14 +105,14 @@ describe("Barista", () => {
 
     expect(barista.getCoffee("Espresso")).toBeInstanceOf(Coffee);
   });
-    
+
   // Vérifie que la quantité s'additionne au stock existant au lieu de créer un doublon
   it("additionne la quantité lorsqu'on ajoute un ingrédient déjà en stock", () => {
     const barista = new Barista("Fanny");
     barista.addIngredient("café", 5);
     barista.addIngredient("café", 3);
 
-    const cafeStock = barista.ingredients.find(i => i.name === "café");
+    const cafeStock = barista.ingredients.find((i) => i.name === "café");
 
     expect(barista.ingredients.length).toBe(1);
     expect(cafeStock?.quantity).toBe(8);
@@ -149,8 +156,8 @@ describe("Barista", () => {
 
     barista.makeCoffee(coffee);
 
-    const cafeStock = barista.ingredients.find(i => i.name === "café");
-    const laitStock = barista.ingredients.find(i => i.name === "lait");
+    const cafeStock = barista.ingredients.find((i) => i.name === "café");
+    const laitStock = barista.ingredients.find((i) => i.name === "lait");
 
     expect(cafeStock?.quantity).toBe(4);
     expect(laitStock?.quantity).toBe(3);
@@ -225,7 +232,9 @@ describe("Barista", () => {
     const success = barista.makeCoffee(coffee);
 
     expect(success).toBe(false);
-    expect(barista.ingredients.find(i => i.name === "café")?.quantity).toBe(5);
+    expect(barista.ingredients.find((i) => i.name === "café")?.quantity).toBe(
+      5,
+    );
   });
 
   // cas limite
