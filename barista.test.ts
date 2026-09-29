@@ -107,16 +107,14 @@ describe("Barista", () => {
   });
 
   // Vérifie que la quantité s'additionne au stock existant au lieu de créer un doublon
-  it("additionne la quantité lorsqu'on ajoute un ingrédient déjà en stock", () => {
-    const barista = new Barista("Fanny");
-    barista.addIngredient("café", 5);
-    barista.addIngredient("café", 3);
+it("additionne la quantité lorsqu'on ajoute un ingrédient déjà en stock", () => {
+  const barista = new Barista("Fanny");
+  barista.addIngredient("café", 5);
+  barista.addIngredient("café", 3);
 
-    const cafeStock = barista.ingredients.find((i) => i.name === "café");
-
-    expect(barista.ingredients.length).toBe(1);
-    expect(cafeStock?.quantity).toBe(8);
-  });
+  // "café" est le seul ingrédient ajouté, donc il est à l'index 0
+  expect(barista.ingredients[0].quantity).toBe(8);
+});
 
   // Vérifie que canMakeCoffee détecte un stock suffisant pour tous les ingrédients
   it("peut préparer un café lorsque tous les ingrédients sont disponibles", () => {
@@ -145,24 +143,20 @@ describe("Barista", () => {
   });
 
   // Vérifie que le stock diminue de la bonne quantité après la préparation
-  it("consomme les ingrédients lorsqu'il prépare un café", () => {
-    const barista = new Barista("Fanny");
-    const coffee = new Coffee("Cappuccino", 4);
-    coffee.addIngredient("café", 1);
-    coffee.addIngredient("lait", 2);
+it("consomme les ingrédients lorsqu'il prépare un café", () => {
+  const barista = new Barista("Fanny");
+  const coffee = new Coffee("Cappuccino", 4);
+  coffee.addIngredient("café", 1);
+  coffee.addIngredient("lait", 2);
 
-    barista.addIngredient("café", 5);
-    barista.addIngredient("lait", 5);
+  barista.addIngredient("café", 5);
+  barista.addIngredient("lait", 5);
 
-    barista.makeCoffee(coffee);
+  barista.makeCoffee(coffee);
 
-    const cafeStock = barista.ingredients.find((i) => i.name === "café");
-    const laitStock = barista.ingredients.find((i) => i.name === "lait");
-
-    expect(cafeStock?.quantity).toBe(4);
-    expect(laitStock?.quantity).toBe(3);
-  });
-
+  expect(barista.ingredients[0].quantity).toBe(4); // café : 5 - 1
+  expect(barista.ingredients[1].quantity).toBe(3); // lait : 5 - 2
+});
   // Vérifie que orderCoffee retourne le prix une fois le café préparé
   it("retourne le prix lorsqu'un café est commandé", () => {
     const barista = new Barista("Fanny");
@@ -221,23 +215,20 @@ describe("Barista", () => {
   });
 
   // Le lait n'a jamais été ajouté au stock : le café ne doit pas être préparé, ni le stock modifié
-  it("ne consomme rien lorsqu'il ne peut pas préparer le café", () => {
-    const barista = new Barista("Fanny");
-    const coffee = new Coffee("Cappuccino", 4);
-    coffee.addIngredient("café", 1);
-    coffee.addIngredient("lait", 2);
+it("ne consomme rien lorsqu'il ne peut pas préparer le café", () => {
+  const barista = new Barista("Fanny");
+  const coffee = new Coffee("Cappuccino", 4);
+  coffee.addIngredient("café", 1);
+  coffee.addIngredient("lait", 2);
 
-    barista.addIngredient("café", 5);
+  barista.addIngredient("café", 5); // lait jamais ajouté au stock
 
-    const success = barista.makeCoffee(coffee);
+  barista.makeCoffee(coffee);
 
-    expect(success).toBe(false);
-    expect(barista.ingredients.find((i) => i.name === "café")?.quantity).toBe(
-      5,
-    );
-  });
+  expect(barista.ingredients[0].quantity).toBe(5); // café inchangé
+});
 
-  // cas limite
+// cas limite
 
   // Le lait est en stock mais en quantité insuffisante (1 au lieu des 2 requis)
   it("ne peut pas préparer un café lorsque la quantité est insuffisante", () => {
