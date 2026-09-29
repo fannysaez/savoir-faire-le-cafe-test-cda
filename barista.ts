@@ -162,10 +162,10 @@ barista.addIngredient("lait", 10);
 
 // Affiche la carte, la possibilité de préparer le cappuccino,
 // le prix de la commande, puis le stock restant.
-console.log(barista.listCoffees());
+// console.log(barista.listCoffees());
 
-console.log(barista.canMakeCoffee(cappuccino));
+// console.log(barista.canMakeCoffee(cappuccino));
 
-console.log(barista.orderCoffee("Cappuccino"));
+// console.log(barista.orderCoffee("Cappuccino"));
 
-console.log(barista.ingredients);
+// console.log(barista.ingredients);

@@ -74,7 +74,6 @@ describe("Barista", () => {
     expect(barista.listCoffees()).toContain(coffee);
   });
 
-  // Vérifie que getCoffee retrouve bien le café par son nom
   it("retrouve un café existant par son nom", () => {
     const barista = new Barista("Fanny");
     const coffee = new Coffee("Espresso", 2);
@@ -83,6 +82,15 @@ describe("Barista", () => {
     expect(barista.getCoffee("Espresso")).toBe(coffee);
   });
 
+  // Vérifie que getCoffee retourne bien un objet de type Coffee
+  it("retourne une instance de Coffee via getCoffee", () => {
+    const barista = new Barista("Fanny");
+    const coffee = new Coffee("Espresso", 2);
+    barista.addCoffee(coffee);
+
+    expect(barista.getCoffee("Espresso")).toBeInstanceOf(Coffee);
+  });
+    
   // Vérifie que la quantité s'additionne au stock existant au lieu de créer un doublon
   it("additionne la quantité lorsqu'on ajoute un ingrédient déjà en stock", () => {
     const barista = new Barista("Fanny");
