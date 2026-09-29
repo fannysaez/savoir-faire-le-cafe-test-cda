@@ -74,6 +74,14 @@ describe("Barista", () => {
     expect(barista.listCoffees()).toContain(coffee);
   });
 
+  //Vérifie qu'un tableau contient un objet avec la même structrure
+  it("le stock contient un ingrédient avec la bonne quantité après ajout", () => {
+  const barista = new Barista("Fanny");
+  barista.addIngredient("café", 5);
+
+  expect(barista.ingredients).toContainEqual(new Ingredient("café", 5));
+});
+
   it("retrouve un café existant par son nom", () => {
     const barista = new Barista("Fanny");
     const coffee = new Coffee("Espresso", 2);
