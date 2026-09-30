@@ -1,6 +1,10 @@
 # savoir-faire-le-café
 
-Projet TDD (Test-Driven Development) : classes `Coffee`, `Ingredient` et `Barista` en TypeScript, testées avec Vitest.
+Projet Test Unitaires : classes `Coffee`, `Ingredient` et `Barista` en TypeScript, testées avec Vitest.
+
+## Définition des tests unitaires
+
+Un test unitaire vérifie automatiquement le comportement d'une petite unité de code, généralement une fonction ou une méthode, de manière isolée. Il permet de s'assurer que chaque composant fonctionne correctement et de détecter rapidement les régressions lors des modifications.
 
 ---
 
